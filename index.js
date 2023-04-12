@@ -47,7 +47,6 @@ async function run() {
       const bearer = req.headers.authorization;
       if (bearer && bearer.startsWith("Bearer ")) {
         const idToken = bearer.split(" ")[1];
-        console.log({ idToken });
         await admin
           .auth()
           .verifyIdToken(idToken)
@@ -59,7 +58,6 @@ async function run() {
               const result = await bookings
                 .find({ email: userEmail })
                 .toArray();
-              console.log(result);
               res.status(200).send(result);
             } else {
               res.status(401).send("Un-authorized Access");
